@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sinh Viên</title>
+</head>
+<body>
+    <h2>Danh Sách Sinh Viên</h2>
+    <table border="1">
+        <tr>
+            <th>Họ và Tên</th>
+            <th>Số Điện Thoại</th>
+            <th>Ngày Sinh</th>
+            <th>Giới Tính</th>
+            <th>Sửa thông tin</th>
+            <th>Xóa thông tin</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.info_name }}</td>
+            <td>{{ student.info_phone }}</td>
+            <td>{{ student.info_dob }}</td>
+            <td>{{ student.info_gender }}</td>
+            <td>
+                <a href="{% url 'edit_information' student.id %}">Sửa</a>                
+            </td>
+            <td>
+                <a href="{% url 'delete_information' student.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Thêm Sinh Viên</h2>
+    <form action="{% url 'submit_information' %}" method="post">
+        {% csrf_token %}
+        <label for="info_name">Họ và Tên:</label>
+        <input type="text" id="info_name" name="info_name" required><br><br>
+
+        <label for="info_phone">Số Điện Thoại:</label>
+        <input type="tel" id="info_phone" name="info_phone" pattern="[0-9]{10}" required><br><br>
+
+        <label for="info_dob">Ngày Sinh:</label>
+        <input type="date" id="info_dob" name="info_dob" required><br><br>
+
+        <label>Giới Tính:</label>
+        <input type="radio" id="male" name="info_gender" value="Nam" required>
+        <label for="male">Nam</label>
+        <input type="radio" id="female" name="info_gender" value="Nữ" required>
+        <label for="female">Nữ</label>
+        <input type="radio" id="other" name="info_gender" value="Khác" required>
+        <label for="other">Khác</label><br><br>
+
+        <button type="submit">Thêm</button>
+    </form>
+</body>
+</html>

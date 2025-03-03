@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh Sửa Sinh Viên</title>
+</head>
+<body>
+    <h2>Chỉnh Sửa Thông Tin Sinh Viên</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="info_name">Họ và Tên:</label>
+        <input type="text" id="info_name" name="info_name" value="{{ student.info_name }}" required><br><br>
+
+        <label for="info_phone">Số Điện Thoại:</label>
+        <input type="tel" id="info_phone" name="info_phone" value="{{ student.info_phone }}" pattern="[0-9]{10}" required><br><br>
+
+        <label for="info_dob">Ngày Sinh:</label>
+        <input type="date" id="info_dob" name="info_dob" value="{{ student.info_dob }}" required><br><br>
+
+        <label>Giới Tính:</label>
+        <input type="radio" id="male" name="info_gender" value="Nam" {% if student.info_gender == "Nam" %}checked{% endif %} required>
+        <label for="male">Nam</label>
+        <input type="radio" id="female" name="info_gender" value="Nữ" {% if student.info_gender == "Nữ" %}checked{% endif %} required>
+        <label for="female">Nữ</label>
+        <input type="radio" id="other" name="info_gender" value="Khác" {% if student.info_gender == "Khác" %}checked{% endif %} required>
+        <label for="other">Khác</label><br><br>
+
+        <button type="submit">Lưu</button>
+        <a href="{% url 'home' %}">Hủy</a>
+    </form>
+</body>
+</html>
