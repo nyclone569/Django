@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Header() {
     const [isHover, setIsHover] = useState(false)
   return (
-    <ul className="h-[70px] max-w-[1200px] mx-auto bg-white flex justify-between items-center px-[20px]">
+    <ul className="h-[70px] max-w-[1200px] mx-auto flex justify-between items-center px-[20px]" style={{backgroundColor: "#babdc2"}}>
         <li className='list-none'>
             <Link className="no-underline text-[45px] text-inherit" to={"#"}>Logo</Link>
         </li>
